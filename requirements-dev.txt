@@ -1,0 +1,4 @@
+black
+pandas
+pytest
+pytest-cov
