@@ -3,7 +3,7 @@
 
 ThinkcellBuilder is a simple unofficial Python library used to build powerpoint presentations with Think-cell charts, textboxes, and tables. 
 
-This project builds on [Duerto](https://github.com/duarteocarmo)'s [think-cell](https://github.com/duarteocarmo/think-cell) package. In addition the functionality in Duerto's package, ThinkcellBuilder provides both a template abstraction and a presentation abstraction so that one can create a whole presentation using combinations of slide templates and charts. This package also adds methods for table and scatter plot manipulations. 
+This project builds on [Duerto](https://github.com/duarteocarmo)'s [think-cell](https://github.com/duarteocarmo/think-cell) package. In addition the functionality in Duerto's package, ThinkcellBuilder provides both a template abstraction and a presentation abstraction so that one can create a whole presentation using combinations of slide templates and charts. This package also adds methods for table and scatter plot manipulations.
 
 In order to use it you will need a valid and working [think-cell license and installation](https://www.think-cell.com/en/). 
 
@@ -24,30 +24,21 @@ Let us say you have generated a template according to [think-cell's automation g
 The thinkcell library helps you generate a `.ppttc` file so that you can generate presentations based on that template using python:
 
 ```python
-from thinkcell import Thinkcell
+from thinkcellbuilder import Presentation, Template
 
-template_name = "simple-template.pptx"
-categories = ["Ads", "Revenue", "Losses"]
-chart_name = "Chart1"
-field_name = "chart_caption"
-text = "Some relevant KPIs"
 filename = "simple-example.ppttc"
 
-data = [["Amazon", 1, 11, 14], ["Slack", 8, 2, 15], ["Ford", 1, 2, 12]]
 
-tc = Thinkcell() # create thinkcell object
-tc.add_template(template_name) # add your template
+slide = Template("simple-template.pptx") # create template object, this usually represents one or a small number of slides
 tc.add_textfield(
-    template_name=template_name,
-    field_name=field_name,
-    text=text,
+    name="Slide Title",
+    text="Company Performance",
 ) # add your text field
 tc.add_chart(
-    template_name=template_name,
-    chart_name=chart_name,
-    categories=categories,
-    data=data,
-) # add you categories and data
+    name="Chart1",
+    categories=["Ads", "Revenue", "Losses"],
+    data=[["Amazon", 1, 11, 14], ["Slack", 8, 2, 15], ["Ford", 1, 2, 12]],
+) # add your categories and data
 
 tc.save_ppttc(filename=filename)
  ```
