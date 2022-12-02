@@ -1,16 +1,18 @@
 # thinkcell 📊
-[![CI](https://github.com/duarteocarmo/think-cell/actions/workflows/main.yml/badge.svg)](https://github.com/duarteocarmo/think-cell/actions/workflows/main.yml) [![codecov](https://codecov.io/gh/duarteocarmo/think-cell/branch/master/graph/badge.svg?token=F71I6S66YW)](https://codecov.io/gh/duarteocarmo/think-cell) [![PyPI version shields.io](https://img.shields.io/pypi/v/thinkcell.svg)](https://pypi.python.org/pypi/thinkcell/) [![Supported Python versions](https://img.shields.io/pypi/pyversions/thinkcell.svg)](https://pypi.org/project/thinkcell/) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black) [![Downloads](https://pepy.tech/badge/thinkcell/month)](https://pepy.tech/project/thinkcell) [![GitHub license](https://img.shields.io/github/license/duarteocarmo/think-cell.svg)](https://github.com/duarteocarmo/think-cell/blob/master/LICENSE) 
+[![CI](https://github.com/philistino/thinkcellbuilder/actions/workflows/main.yml/badge.svg)](https://github.com/philistino/thinkcellbuilder/actions/workflows/main.yml) [![codecov](https://codecov.io/gh/philistino/thinkcellbuilder/branch/master/graph/badge.svg?token=F71I6S66YW)](https://codecov.io/gh/philistino/thinkcellbuilder) [![PyPI version shields.io](https://img.shields.io/pypi/v/thinkcell.svg)](https://pypi.python.org/pypi/thinkcellbuilder/) [![Supported Python versions](https://img.shields.io/pypi/pyversions/thinkcellbuilder.svg)](https://pypi.org/project/thinkcellbuilder/) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black) [![Downloads](https://pepy.tech/badge/thinkcellbuilder/month)](https://pepy.tech/project/thinkcellbuilder) [![GitHub license](https://img.shields.io/github/license/philistino/thinkcellbuilder.svg)](https://github.com/philistino/thinkcellbuilder/blob/master/LICENSE) 
 
-thinkcell is a simple unofficial python library that helps you generate presentations in a quick and automated way. 
+ThinkcellBuilder is a simple unofficial Python library used to build powerpoint presentations with Think-cell charts, textboxes, and tables. 
+
+This project builds on [Duerto](https://github.com/duarteocarmo)'s [think-cell](https://github.com/duarteocarmo/think-cell) package. In addition the functionality in Duerto's package, ThinkcellBuilder provides both a template abstraction and a presentation abstraction so that one can create a whole presentation using combinations of slide templates and charts. This package also adds methods for table and scatter plot manipulations. 
 
 In order to use it you will need a valid and working [think-cell license and installation](https://www.think-cell.com/en/). 
 
 ### Installation
 
-thinkcell is available on PyPi. 
+ThinkcellBuilder is available on PyPi. 
 
 ```sh
- $ pip install thinkcell
+ $ pip install thinkcellbuilder
  ```
 
 ### Tutorial and usage
