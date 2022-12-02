@@ -1,0 +1,79 @@
+name: CI
+on:
+  push:
+    branches: [main]
+    tags:
+      - "*"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.7", "3.8", "3.8", "3.9", "3.10", "3.11"]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dev requirements
+        run: pip install -r requirements-dev.txt
+
+      - name: Test with pytest
+        run: pytest .
+
+  test-coverage:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dev requirements
+        run: pip install -r requirements-dev.txt
+
+      - name: Generate coverage report
+        run: pytest . --cov=thinkcell --cov-report=xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+
+  build-n-publish:
+    needs: test-coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install pypa/build
+        run: >-
+          python -m
+          pip install
+          build
+          --user
+
+      - name: Build a binary wheel and a source tarball
+        run: >-
+          python -m
+          build
+          --sdist
+          --wheel
+          --outdir dist/
+          .
+
+      # - name: Publish distribution to PyPI
+      #   if: startsWith(github.ref, 'refs/tags')
+      #   uses: pypa/gh-action-pypi-publish@master
+      #   with:
+      #     password: ${{ secrets.PYPI_API_TOKEN }}

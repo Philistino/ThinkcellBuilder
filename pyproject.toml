@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "thinkcellbuilder"
+version = "0.1.0"
+description = ""
+authors = ["Philistino <philistino@protonmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+
+[tool.poetry.dev-dependencies]
+black = "^22.3.0"
+pytest = "^7.1.1"
+pytest-cov = "^3.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.black]
+line-length = 80
+include = '\.pyi?$'
+target-version = ['py310']
+fast = true
+exclude = '''
+(
+  /(                        # exclude a few common directories in the
+    \.git                   # root of the project
+    | \.pytest_cache
+    | python-venv
+    | \.venv
+    | build
+    | dist
+    | \.tox
+  ))
+'''
+
+[tool.pytest.ini_options]
+addopts = "--doctest-modules --cov=thinkcellbuilder --cov-report html --cov-report term"
+testpaths = [
+    "tests",
+    "thinkcellbuilder",
+]
