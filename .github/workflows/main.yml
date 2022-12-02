@@ -40,7 +40,7 @@ jobs:
         run: pip install -r requirements-dev.txt
 
       - name: Generate coverage report
-        run: pytest . --cov=thinkcell --cov-report=xml
+        run: pytest . --cov=thinkcellbuilder --cov-report=xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
