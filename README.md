@@ -1,5 +1,5 @@
 # thinkcell 📊
-[![CI](https://github.com/philistino/thinkcellbuilder/actions/workflows/main.yml/badge.svg)](https://github.com/philistino/thinkcellbuilder/actions/workflows/main.yml) [![codecov](https://codecov.io/gh/philistino/thinkcellbuilder/branch/master/graph/badge.svg?token=F71I6S66YW)](https://codecov.io/gh/philistino/thinkcellbuilder) [![PyPI version shields.io](https://img.shields.io/pypi/v/thinkcell.svg)](https://pypi.python.org/pypi/thinkcellbuilder/) [![Supported Python versions](https://img.shields.io/pypi/pyversions/thinkcellbuilder.svg)](https://pypi.org/project/thinkcellbuilder/) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black) [![Downloads](https://pepy.tech/badge/thinkcellbuilder/month)](https://pepy.tech/project/thinkcellbuilder) [![GitHub license](https://img.shields.io/github/license/philistino/thinkcellbuilder.svg)](https://github.com/philistino/thinkcellbuilder/blob/master/LICENSE) 
+[![CI](https://github.com/philistino/thinkcellbuilder/actions/workflows/main.yml/badge.svg)](https://github.com/philistino/thinkcellbuilder/actions/workflows/main.yml) [![codecov](https://codecov.io/gh/philistino/thinkcellbuilder/branch/main/graph/badge.svg?token=F71I6S66YW)](https://codecov.io/gh/philistino/thinkcellbuilder) [![PyPI version shields.io](https://img.shields.io/pypi/v/thinkcell.svg)](https://pypi.python.org/pypi/thinkcellbuilder/) [![Supported Python versions](https://img.shields.io/pypi/pyversions/thinkcellbuilder.svg)](https://pypi.org/project/thinkcellbuilder/) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black) [![Downloads](https://pepy.tech/badge/thinkcellbuilder/month)](https://pepy.tech/project/thinkcellbuilder) [![GitHub license](https://img.shields.io/github/license/philistino/thinkcellbuilder.svg)](https://github.com/philistino/thinkcellbuilder/blob/main/LICENSE) 
 
 ThinkcellBuilder is a simple unofficial Python library used to build powerpoint presentations with Think-cell charts, textboxes, and tables. 
 
@@ -19,7 +19,7 @@ ThinkcellBuilder is available on PyPi.
 
 Let us say you have generated a template according to [think-cell's automation guidelines](https://www.think-cell.com/en/support/manual/jsondataautomation.shtml) called `simple-template.pptx` with the following chart called `Chart1`: 
 
-<img src="https://raw.githubusercontent.com/duarteocarmo/think-cell/master/assets/example.png" width="500">
+<!-- <img src="https://raw.githubusercontent.com/duarteocarmo/think-cell/main/assets/example.png" width="500"> -->
 
 The thinkcell library helps you generate a `.ppttc` file so that you can generate presentations based on that template using python:
 
