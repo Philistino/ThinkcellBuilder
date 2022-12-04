@@ -66,7 +66,7 @@ slide2.add_chart(
 presentation.add_template(slide2)
 
 # save the ppttc file 
-presentation.save_ppttc(filename="simple-example.ppttc")
+presentation.save_ppttc(path="simple-example.ppttc")
  ```
 
 Once done, go ahead and double click the generated `simple-example.ppttc` file. Think-cell will populate your charts/text fields based on the code above and open a powerpoint presentation. Save it and you are done!
@@ -77,22 +77,22 @@ Make sure you have pandas installed (e.g., `pip install pandas`)
 
 ```python
 from thinkcellbuilder import Presentation, Template
-import pandas
+import pandas as pd
 
-chart_name = "Chart1"
-filename = "simple-example.ppttc"
-dataframe = pandas.DataFrame(
+df = pd.DataFrame(
     columns=["Company", "Ads", "Revenue", "Losses"],
     data=[["Amazon", 1, 11, 14], ["Slack", 8, 2, 15], ["Ford", 1, 2, 12]],
 )
 
 slide = Template("simple-template.pptx") # create template object
 slide.add_chart_from_dataframe(
-    chart_name="Chart1",
-    dataframe=dataframe,
+    name="Chart1",
+    dataframe=df,
 ) # add your dataframe
 
-tc.save_ppttc(filename=filename)
+presentation = Presentation()
+presentation.add_template(slide)
+tc.save_ppttc(path="simple-example.ppttc")
  ```
 
 Visit the [examples folder](examples) for more examples and source files. 

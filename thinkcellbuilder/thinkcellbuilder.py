@@ -319,7 +319,7 @@ class Template:
     def add_scatter_from_dataframe(
         self,
         name: str,
-        dataframe,
+        dataframe: pd.DataFrame,
         x: str,
         y: str,
         label: Optional[str] = None,
