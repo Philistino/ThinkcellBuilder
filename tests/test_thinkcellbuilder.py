@@ -51,7 +51,7 @@ def test_verify_template_3():
 
 def test_add_chart_warning():
     tc = Template(path="template.pptx")
-    with pytest.warns(UserWarning) as record:
+    with pytest.warns(UserWarning):
         tc.add_chart(
             name=234,
             categories=["Alpha", "bravo"],
@@ -61,7 +61,7 @@ def test_add_chart_warning():
 
 def test_add_textfield_warning():
     tc = Template(path="template.pptx")
-    with pytest.warns(UserWarning) as record:
+    with pytest.warns(UserWarning):
         tc.add_textfield(
             name=234,
             text="A great slide",
