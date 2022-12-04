@@ -28,13 +28,12 @@ class DataFrameError(Exception):
 
 @dataclass
 class Template:
-    """Represents a template to be included in an output presentation.
+    """Represents a powerpoint template to be included in an output presentation.
     The .pptx file can include more than one slide.
     Charts can be added with the class methods if you need
     to populate specific parts of the template.
 
     It is not possible to verify:
-        - that a template exists
         - that a template has named objects to populate
         - that objects are of the name or type described in these method calls
 
@@ -438,19 +437,18 @@ class Presentation:
         self._verify_template(template.path)
         self.slides.append(template)
 
-    def save_ppttc(self, filename: Union[Path, str]):
+    def save_ppttc(self, path: Union[Path, str]):
         """Saves the Thinkcell object as a `.ppttc` file.
 
         Parameters
         ----------
-        filename : str
-            The name of the file to be saved.
+        path : Union[pathlib.Path,str]
+            The path to the output file.
 
         Raises
         ------
         ValueError
-            If the filename specified is not a string or does
-            not end in `.ppttc`.
+            If the filename specified does not end in `.ppttc`.
         ValueError
             If the presentation has no slides
 
@@ -458,9 +456,9 @@ class Presentation:
 
         Copyright (c) 2019 Duarte OC
         """
-        if not str(filename).endswith(".ppttc"):
+        if not str(path).endswith(".ppttc"):
             raise ValueError(
-                f"You want to save your file as a '.ppttc' file, not a '{filename}'. Visit https://www.think-cell.com/en/support/manual/jsondataautomation.shtml for more information."
+                f"You want to save your file as a '.ppttc' file, not a '{path}'. Visit https://www.think-cell.com/en/support/manual/jsondataautomation.shtml for more information."
             )
 
         if not self.slides:
@@ -469,6 +467,6 @@ class Presentation:
             )
 
         to_dump = [i.serialize() for i in self.slides]
-        with open(filename, "w") as outfile:
+        with open(path, "w") as outfile:
             json.dump(to_dump, outfile)
             return True

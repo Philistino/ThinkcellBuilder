@@ -326,7 +326,7 @@ def test_save_ppttc_bad_file(input, output):
         data=[["today", 1, 2], ["tomorrow", 3, 4]],
     )
     with pytest.raises(output):
-        Presentation([tc]).save_ppttc(filename=input)
+        Presentation([tc]).save_ppttc(path=input)
 
 
 def test_save_pptc():
@@ -342,7 +342,7 @@ def test_save_ppttc():
         categories=["alpha", "bravo"],
         data=[["today", 1, 2], ["tomorrow", 3, 4]],
     )
-    assert Presentation([tc]).save_ppttc(filename="test.ppttc") == True
+    assert Presentation([tc]).save_ppttc(path="test.ppttc") == True
     os.remove("test.ppttc")
 
 
