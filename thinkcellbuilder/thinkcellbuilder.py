@@ -14,11 +14,7 @@ try:
 except ImportError:
     PANDAS = False
     warnings.warn(
-        """Pandas not installed, methods adding charts from dataframes will raise RuntimeErrors.
-    For full functionality install with 
-        pip install thinkcell-builder[pandas]
-    or make sure pandas is installed in the same environment
-        'pip install pandas'"""
+        "Pandas not installed, methods adding charts from dataframes will raise RuntimeErrors. For full functionality make sure pandas is installed in the same environment: 'pip install pandas'"
     )
 
 
@@ -78,7 +74,7 @@ class Template:
             )
         spec = {}
         spec["name"] = str(name)
-        field_text = [self.transform_input(text)]
+        field_text = [self._transform_input(text)]
         spec["table"] = [field_text]
         self.thinkcell_objects.append(spec)
 
@@ -101,11 +97,11 @@ class Template:
         spec["name"] = str(name)
         spec["table"] = []
         for data_list, color in zip(data, fill):
-            spec["table"].append([self.transform_input(el, color) for el in data_list])
+            spec["table"].append([self._transform_input(el, color) for el in data_list])
         self.thinkcell_objects.append(spec)
 
     @staticmethod
-    def transform_input(data_element, color=None):
+    def _transform_input(data_element, color=None):
         """Transforms a `data element` into an object like {"type": data element}.
 
         Parameters
@@ -221,14 +217,14 @@ class Template:
         spec = {}
         spec["name"] = str(name)
         chart_categories = [None] + [
-            self.transform_input(element) for element in categories
+            self._transform_input(element) for element in categories
         ]
 
         spec["table"] = [chart_categories]
         if first_row_blank:  # add blank row for 100% row
             spec["table"].append([])
         for data_list, color in zip(data, fill):
-            spec["table"].append([self.transform_input(el, color) for el in data_list])
+            spec["table"].append([self._transform_input(el, color) for el in data_list])
         self.thinkcell_objects.append(spec)
 
     def add_chart_from_dataframe(
@@ -313,7 +309,7 @@ class Template:
         spec["name"] = str(name)
         spec["table"] = [[]]
         for data_list, color in zip(data, fill):
-            spec["table"].append([self.transform_input(el, color) for el in data_list])
+            spec["table"].append([self._transform_input(el, color) for el in data_list])
         self.thinkcell_objects.append(spec)
 
     def add_scatter_from_dataframe(

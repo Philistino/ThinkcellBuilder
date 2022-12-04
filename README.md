@@ -5,9 +5,9 @@ ThinkcellBuilder is a simple unofficial Python library used to build powerpoint 
 
 This project builds on [Duerto](https://github.com/duarteocarmo)'s [think-cell](https://github.com/duarteocarmo/think-cell) package. 
 
-ThinkcellBuilder allows the user to automate data entry for all named Think-cell objects, except Gantt charts, on a powerpoint template. It also provides a presentation abstraction so that one can create a whole presentation using combinations of slide templates and charts.
+ThinkcellBuilder allows the user to automate data entry for all named Think-cell objects (e.g., charts, textfields, tables), except Gantt charts, on a powerpoint template. It also provides a presentation abstraction so that one can create a whole presentation using combinations of slide templates and charts.
 
-This package outputs .ppttc files that, when opened with Think-cell, build powerpoint presentations. A [think-cell license and installation](https://www.think-cell.com/en/) license is not required to use this package, but one is needed to build the presentation. 
+This package outputs .ppttc files that, when opened with Think-cell, build powerpoint presentations. A [think-cell license and installation](https://www.think-cell.com/en/) license is not required to use this package, but one is needed to build the presentation. Pptc files are just 
 
 ### Installation
 
@@ -98,6 +98,9 @@ tc.save_ppttc(path="simple-example.ppttc")
 Visit the [examples folder](examples) for more examples and source files. 
 
 If you wish to learn more about this process, visit the think-cell [automation documentation](https://www.think-cell.com/en/support/manual/jsondataautomation.shtml). 
+
+## Dependencies
+ThinkcellBuilder has no dependencies outside the Python standard library. If you want to create charts from pandas dataframes, pandas is obviously needed.
 
 ## Limitations
 It is currently impossible to derive the types or names of Think-cell objects (e.g., charts, named textfields, etc.) in a template programatically, so all automation methods rely on typo-free expression of object names. Mis-typed chart names are silently ignored by Think-cell when it is building the presentation, so please double check your object names and types. 

@@ -1,6 +1,8 @@
-import os
+import json
 from datetime import datetime
+from pathlib import Path
 
+import jsonschema
 import pandas as pd
 import pytest
 
@@ -22,12 +24,12 @@ def test_init():
     ],
 )
 def test_transform_input(test_input, expected):
-    assert Template.transform_input(test_input) == expected
+    assert Template._transform_input(test_input) == expected
 
 
 def test_transform_input_bad():
     with pytest.raises(ValueError):
-        Template.transform_input([3, 4])
+        Template._transform_input([3, 4])
 
 
 def test_verify_template_1():
@@ -70,7 +72,7 @@ def test_add_chart_bad_dimensions():
     tc = Template(path="example.pptx")
     with pytest.raises(ValueError):
         tc.add_chart(
-            name="Cool Name bro",
+            name="Cool Name",
             categories=["Alpha", "bravo"],
             data=[[3, 4, datetime(2012, 9, 16, 0, 0)], [2, "adokf"]],
         )
@@ -79,7 +81,7 @@ def test_add_chart_bad_dimensions():
 def test_add_chart():
     tc = Template(path="example.pptx")
     tc.add_chart(
-        name="Cool Name bro",
+        name="Cool Name",
         categories=["Alpha", "bravo"],
         data=[[3, 4, datetime(2012, 9, 16, 0, 0)], [2, "adokf", 4]],
     )
@@ -88,7 +90,7 @@ def test_add_chart():
         "template": "example.pptx",
         "data": [
             {
-                "name": "Cool Name bro",
+                "name": "Cool Name",
                 "table": [
                     [None, {"string": "Alpha"}, {"string": "bravo"}],
                     [],
@@ -112,7 +114,7 @@ def test_add_chart():
 def test_add_chart_with_fill():
     tc = Template(path="example.pptx")
     tc.add_chart(
-        name="Cool Name bro",
+        name="Cool Name",
         categories=["Alpha", "bravo"],
         data=[[3, 4, datetime(2012, 9, 16, 0, 0)], [2, "adokf", 4]],
         fill=["#70AD47", "#ED7D31"],
@@ -122,7 +124,7 @@ def test_add_chart_with_fill():
         "template": "example.pptx",
         "data": [
             {
-                "name": "Cool Name bro",
+                "name": "Cool Name",
                 "table": [
                     [None, {"string": "Alpha"}, {"string": "bravo"}],
                     [],
@@ -146,7 +148,7 @@ def test_add_chart_with_fill_error():
     tc = Template(path="example.pptx")
     with pytest.raises(ValueError):
         tc.add_chart(
-            name="Cool Name bro",
+            name="Cool Name",
             categories=["Alpha", "bravo"],
             data=[[3, 4, datetime(2012, 9, 16, 0, 0)], [2, "adokf", 4]],
             fill=["#70AD47"],
@@ -329,21 +331,21 @@ def test_save_ppttc_bad_file(input, output):
         Presentation([tc]).save_ppttc(path=input)
 
 
-def test_save_pptc():
+def test_save_ppttc_no_slides():
     tc = Presentation()
     with pytest.raises(ValueError):
         tc.save_ppttc("test.ppttc")
 
 
-def test_save_ppttc():
+def test_save_ppttc(tmp_path: Path):
     tc = Template(path="example.pptx")
     tc.add_chart(
         name="Chart name",
         categories=["alpha", "bravo"],
         data=[["today", 1, 2], ["tomorrow", 3, 4]],
     )
-    assert Presentation([tc]).save_ppttc(path="test.ppttc") == True
-    os.remove("test.ppttc")
+    p = tmp_path.joinpath("test1.ppttc")
+    assert Presentation([tc]).save_ppttc(p) == True
 
 
 def test_add_table():
@@ -548,3 +550,46 @@ def test_add_scatter():
             }
         ],
     }
+
+
+def test_output_schema(tmp_path: Path):
+    pres = Presentation()
+    slide = Template(path="example.pptx")
+    dataframe = pd.DataFrame(
+        columns=["Company", "Employees", "Revenue", "Other"],
+        data=[
+            ["Apple", 200, 1.5, 10],
+            ["Amazon", 100, 1.0, 12],
+            ["Slack", 50, 0.5, 16],
+        ],
+    )
+    slide.add_scatter_from_dataframe(
+        name="Scatter Batter",
+        dataframe=dataframe,
+        x="Employees",
+        y="Revenue",
+        label="Company",
+    )
+    slide.add_textfield("test", "this is a test")
+    pres.add_template(slide)
+
+    slide2 = Template("example2.pptx")
+    slide2.add_table(
+        name="nice table",
+        data=[["A1", "A2"], ["B1", "B2"]],
+        fill=["#000000", "#111111"],
+    )
+    slide2.add_pie_chart(
+        name="tasty pie",
+        data=[["Series1", 90], ["Series2", 10]],
+    )
+    pres.add_template(slide2)
+
+    with open(Path(__file__).parent.joinpath("resources", "ppttc-schema.json")) as file:
+        schema = json.load(file)
+
+    out_path = tmp_path.joinpath("test.ppttc")
+    pres.save_ppttc(out_path)
+    with open(out_path) as f:
+        instance = json.load(f)
+    jsonschema.validate(instance, schema)

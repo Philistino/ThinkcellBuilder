@@ -2,3 +2,4 @@ black
 pandas
 pytest
 pytest-cov
+jsonschema
