@@ -12,7 +12,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     keywords="automation powerpoint thinkcell ppttc business consulting",
-    licence="MIT",
+    license="MIT",
     url="https://github.com/Philistino/ThinkcellBuilder",
     packages=setuptools.find_packages(),
     classifiers=[
