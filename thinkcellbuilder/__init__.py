@@ -1,2 +1,1 @@
-from thinkcellbuilder.thinkcellbuilder import (DataFrameError, Presentation,
-                                               Template)
+from thinkcellbuilder.thinkcellbuilder import DataFrameError, Presentation, Template

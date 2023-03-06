@@ -585,11 +585,17 @@ def test_output_schema(tmp_path: Path):
     )
     pres.add_template(slide2)
 
-    with open(Path(__file__).parent.joinpath("resources", "ppttc-schema.json")) as file:
-        schema = json.load(file)
-
     out_path = tmp_path.joinpath("test.ppttc")
     pres.save_ppttc(out_path)
     with open(out_path) as f:
         instance = json.load(f)
-    jsonschema.validate(instance, schema)
+
+    with open(Path(__file__).parent.joinpath("resources", "ppttc-schema.json")) as file:
+        schema11 = json.load(file)
+    jsonschema.validate(instance, schema11)
+
+    with open(
+        Path(__file__).parent.joinpath("resources", "ppttc-schema12.json")
+    ) as file:
+        schema12 = json.load(file)
+    jsonschema.validate(instance, schema12)
