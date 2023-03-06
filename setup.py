@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="ThinkcellBuilder",
-    version="0.1.0",
+    version="0.1.1",
     author="Philistino",
     author_email="philistino@protonmail.com",
     description="Simple unofficial Python library for generating PowerPoint presentations using Think-cell",

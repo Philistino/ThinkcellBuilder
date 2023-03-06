@@ -79,7 +79,7 @@ class Template:
         self.thinkcell_objects.append(spec)
 
     def add_table(
-        self, name: str, data: list[list], fill: Optional[list[str]] = None
+        self, name: str, data: list[list], fill: Optional[list[list[str]]] = None
     ):  # TODO make fills for each cell instead of each row, if fills really are possible
         """
         Adds a table to the template object.
@@ -90,14 +90,30 @@ class Template:
             The name of the chart in the specified template
         data : list[list]
             A list of lists. Each list contains the row of data to be added.
+        fill : list[list[str]]
+            A list of lists. Each list contains the fill of each cell in the table.
+            If a single row of color string values is passed, it will be applied row-wise.
         """
         if fill is None:
-            fill = [None for _ in data]
+            fill = [[None for _ in row] for row in data]
+
+        # TODO: add an assertion here to make sure the fill and data shapes match
+        if not all(len(d_row) == len(f_row) for d_row, f_row in zip(data, fill)):
+            fill2 = []
+            for d_row, color in zip(data, fill):
+                fill2.append([color for _ in d_row])
+            fill = fill2
+
         spec = {}
         spec["name"] = str(name)
         spec["table"] = []
-        for data_list, color in zip(data, fill):
-            spec["table"].append([self._transform_input(el, color) for el in data_list])
+        for data_list, colors in zip(data, fill):
+            spec["table"].append(
+                [
+                    self._transform_input(el, color)
+                    for el, color in zip(data_list, colors)
+                ]
+            )
         self.thinkcell_objects.append(spec)
 
     @staticmethod

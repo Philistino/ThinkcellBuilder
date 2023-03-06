@@ -375,35 +375,35 @@ def test_add_table():
     }
 
 
-# def test_add_table_per_cell_fill():
-#     """come back to this if table fills are possible"""
-#     tc = Template(path="example.pptx")
-#     tc.add_table(
-#         name="nice table",
-#         data=[["A1", "A2"], ["B1", "B2"]],
-#         fill=[
-#             ["#000000", "#111111"],
-#             ["#222222", "#333333"],
-#         ],
-#     )
-#     assert tc.serialize() == {
-#         "template": "example.pptx",
-#         "data": [
-#             {
-#                 "name": "nice table",
-#                 "table": [
-#                     [
-#                         {"string": "A1", "fill": "#000000"},
-#                         {"string": "A2", "fill": "#111111"},
-#                     ],
-#                     [
-#                         {"string": "B1", "fill": "#222222"},
-#                         {"string": "B2", "fill": "#333333"},
-#                     ],
-#                 ],
-#             }
-#         ],
-#     }
+def test_add_table_per_cell_fill():
+    """come back to this if table fills are possible"""
+    tc = Template(path="example.pptx")
+    tc.add_table(
+        name="nice table",
+        data=[["A1", "A2"], ["B1", "B2"]],
+        fill=[
+            ["#000000", "#111111"],
+            ["#222222", "#333333"],
+        ],
+    )
+    assert tc.serialize() == {
+        "template": "example.pptx",
+        "data": [
+            {
+                "name": "nice table",
+                "table": [
+                    [
+                        {"string": "A1", "fill": "#000000"},
+                        {"string": "A2", "fill": "#111111"},
+                    ],
+                    [
+                        {"string": "B1", "fill": "#222222"},
+                        {"string": "B2", "fill": "#333333"},
+                    ],
+                ],
+            }
+        ],
+    }
 
 
 def test_add_table_nofill():
